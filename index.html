@@ -36,6 +36,38 @@
     #register-btn:hover {
       background: #0056b3;
     }
+    #form-container {
+      display: none;
+      margin-top: 20px;
+      text-align: left;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button[type="submit"] {
+      width: 100%;
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button[type="submit"]:hover {
+      background: #218838;
+    }
   </style>
 </head>
 <body> 
@@ -49,56 +81,13 @@
   </video>
 
   <br>
-  <button id="register-btn" onclick="window.location.href='https://forms.gle/sizning-formangiz'">
-    Ro‘yxatdan o‘tish
-  </button>
+  <button id="register-btn">Ro‘yxatdan o‘tish</button>
 
-  <script>
-    const video = document.getElementById('promo-video');
-    const btn = document.getElementById('register-btn');
-
-    video.addEventListener('ended', () => {
-      btn.style.display = 'inline-block';
-    });
-  </script>
-<body>
-  <h2>Ro'yxatdan o'tish</h2>
-
-  <form id="myForm">
-    <input type="text" name="name" placeholder="Ism" required><br><br>
-    <input type="email" name="email" placeholder="Email" required><br><br>
-    <button type="submit">Yuborish</button>
-  </form>
-
-  <div id="message" style="margin-top:15px; color:green;"></div>
-
-  <script>
-    document.getElementById("myForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-
-      const form = e.target;
-      const data = new FormData(form);
-
-      fetch("https://script.google.com/macros/s/AKfycbwx6TWf8nk1iBNQ-OLEXk2a0M2V7-TFnBXTZ2aQWb9TeDdnjDywaIPJ_sAAcYa88nDYLQ/exec", {
-  method: "POST",
-  body: data
-})
-
-      .then(res => res.text())
-      .then(() => {
-        document.getElementById("message").innerHTML = `
-          ✅ Ro'yxatdan o'tdingiz! <br>
-          👉 <a href="https://t.me/+tcenZHS3OEJlOGRi" target="_blank">Telegram kanalga o'tish</a>
-        `;
-        form.reset();
-      })
-      .catch(err => {
-        document.getElementById("message").innerText = "Xatolik yuz berdi, qayta urinib ko'ring.";
-        console.error(err);
-      });
-    });
-  </script>
-</body>
-
-</body>
-</html>
+  <div id="form-container">
+    <h2>Ro'yxatdan o'tish</h2>
+    <form id="myForm">
+      <input type="text" name="fullname" placeholder="Ism Familiya" required><br>
+      <input type="tel" name="phone" placeholder="Telefon raqam" required><br>
+      <input type="text" name="location" placeholder="Yashash hududi" required><br>
+      <select name="availability" required>
+        <option value="">09:30 dan 18:30 gacha ishlay ol

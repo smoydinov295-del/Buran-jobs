@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Sayt</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    video {
+      width: 100%;
+      max-width: 700px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    #register-btn {
+      display: none;
+      margin-top: 20px;
+      padding: 15px 25px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    #register-btn:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Xush kelibsiz!</h1>
+  <p>Videoni oxirigacha ko‘ring va keyin ro‘yxatdan o‘ting 👇</p>
+
+  <video id="promo-video" controls>
+    <source src="video.mp4" type="video/mp4">
+    Sizning brauzeringiz videoni qo‘llab-quvvatlamaydi.
+  </video>
+
+  <br>
+  <button id="register-btn" onclick="window.location.href='https://forms.gle/sizning-formangiz'">
+    Ro‘yxatdan o‘tish
+  </button>
+
+  <script>
+    const video = document.getElementById('promo-video');
+    const btn = document.getElementById('register-btn');
+
+    video.addEventListener('ended', () => {
+      btn.style.display = 'inline-block';
+    });
+  </script>
+</body>
+</html>

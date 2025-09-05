@@ -3,142 +3,84 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mini Sayt</title>
+  <title>Video + Forma</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background: #f9f9f9;
-      margin: 0;
-      padding: 20px;
-    }
-    h1 {
-      margin-bottom: 20px;
-    }
-    video {
-      width: 100%;
-      max-width: 700px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-    #register-btn {
-      display: none;
-      margin-top: 20px;
-      padding: 15px 25px;
-      background: #007BFF;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 18px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    #register-btn:hover {
-      background: #0056b3;
-    }
-    #form-container {
-      display: none;
-      margin-top: 20px;
-      text-align: left;
-      max-width: 400px;
-      margin-left: auto;
-      margin-right: auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    input, select {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    button[type="submit"] {
-      width: 100%;
-      background: #28a745;
-      color: white;
-      border: none;
-      padding: 12px;
-      border-radius: 6px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    button[type="submit"]:hover {
-      background: #218838;
-    }
+    body {font-family: Arial, sans-serif; text-align: center; background: #f9f9f9;}
+    video {width: 100%; max-width: 700px; border-radius: 10px; margin:20px 0;}
+    #register-btn {display:none; padding:12px 20px; background:#007BFF; color:#fff; border:none; border-radius:8px; cursor:pointer;}
+    #form-container {display:none; max-width:400px; margin:20px auto; background:#fff; padding:20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1);}
+    input, select {width:100%; padding:10px; margin:8px 0; border:1px solid #ccc; border-radius:5px;}
+    button[type="submit"] {background:#28a745; color:#fff; padding:12px; border:none; border-radius:6px; cursor:pointer; width:100%;}
+    button[type="submit"]:hover {background:#218838;}
   </style>
 </head>
-<body> 
+<body>
 
-  <h1>Xush kelibsiz!</h1>
-  <p>Videoni oxirigacha ko‘ring va keyin ro‘yxatdan o‘ting 👇</p>
+  <h2>Xush kelibsiz!</h2>
+  <p>Videoni oxirigacha ko‘ring 👇</p>
 
   <video id="promo-video" controls>
     <source src="Video.mp4" type="video/mp4">
-    Sizning brauzeringiz videoni qo‘llab-quvvatlamaydi.
+    Brauzeringiz videoni qo‘llab-quvvatlamaydi.
   </video>
 
-  <br>
   <button id="register-btn">Ro‘yxatdan o‘tish</button>
 
   <div id="form-container">
-    <h2>Ro'yxatdan o'tish</h2>
+    <h3>Ro'yxatdan o'tish</h3>
     <form id="myForm">
-      <input type="text" name="fullname" placeholder="Ism Familiya" required><br>
-      <input type="tel" name="phone" placeholder="Telefon raqam" required><br>
-      <input type="text" name="location" placeholder="Yashash hududi" required><br>
+      <input type="text" name="fullname" placeholder="Ism Familiya" required>
+      <input type="tel" name="phone" placeholder="Telefon raqam" required>
+      <input type="text" name="location" placeholder="Yashash hududi" required>
       <select name="availability" required>
         <option value="">09:30 dan 18:30 gacha ishlay olasizmi?</option>
         <option value="Ha">Ha</option>
         <option value="Yo‘q">Yo‘q</option>
-      </select><br>
+      </select>
       <button type="submit">Yuborish</button>
     </form>
-    <div id="message" style="margin-top:15px; color:green;"></div>
+    <div id="message" style="margin-top:10px;color:green;"></div>
   </div>
 
   <script>
-    const video = document.getElementById('promo-video');
-    const btn = document.getElementById('register-btn');
-    const formContainer = document.getElementById('form-container');
+    const video = document.getElementById("promo-video");
+    const btn = document.getElementById("register-btn");
+    const formContainer = document.getElementById("form-container");
 
-    // Video tugagach, tugma chiqadi
-    video.addEventListener('ended', () => {
-      btn.style.display = 'inline-block';
+    // Video tugaganda tugma ko‘rsin
+    video.addEventListener("ended", () => {
+      btn.style.display = "inline-block";
     });
 
-    // Tugma bosilganda forma chiqadi
-    btn.addEventListener('click', () => {
-      formContainer.style.display = 'block';
-      btn.style.display = 'none';
+    // Tugma bosilganda forma chiqsin
+    btn.addEventListener("click", () => {
+      formContainer.style.display = "block";
+      btn.style.display = "none";
     });
 
-    // Formani yuborish
-    document.getElementById("myForm").addEventListener("submit", function(e) {
+    // Forma yuborish
+    document.getElementById("myForm").addEventListener("submit", function(e){
       e.preventDefault();
-
       const form = e.target;
       const data = new FormData(form);
 
       fetch("https://script.google.com/macros/s/AKfycbwx6TWf8nk1iBNQ-OLEXk2a0M2V7-TFnBXTZ2aQWb9TeDdnjDywaIPJ_sAAcYa88nDYLQ/exec", {
-        method: "POST",
-        body: data
+        method:"POST",
+        body:data
       })
-      .then(res => res.text())
-      .then(() => {
+      .then(res=>res.text())
+      .then(()=>{
         document.getElementById("message").innerHTML = `
           ✅ Ro'yxatdan o'tdingiz! <br>
           👉 <a href="https://t.me/+tcenZHS3OEJlOGRi" target="_blank">Telegram kanalga o'tish</a>
         `;
         form.reset();
       })
-      .catch(err => {
-        document.getElementById("message").innerText = "Xatolik yuz berdi, qayta urinib ko'ring.";
-        console.error(err);
+      .catch(err=>{
+        document.getElementById("message").innerText = "Xatolik yuz berdi, qayta urinib ko‘ring.";
       });
     });
   </script>
+
 </body>
 </html>

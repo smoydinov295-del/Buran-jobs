@@ -125,11 +125,7 @@
       })
       .then(res=>res.text())
       .then(()=>{
-        document.getElementById("message").innerHTML = `
-          ✅ Ro'yxatdan o'tdingiz! <br>
-          👉 <a href="https://t.me/+tcenZHS3OEJlOGRi" target="_blank">Telegram kanalga o'tish</a>
-        `;
-        form.reset();
+        window.location.href = "https://t.me/+tcenZHS3OEJlOGRi";
       })
       .catch(()=>{
         document.getElementById("message").innerText = "Xatolik yuz berdi, qayta urinib ko‘ring.";

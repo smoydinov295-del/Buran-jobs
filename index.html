@@ -61,5 +61,43 @@
       btn.style.display = 'inline-block';
     });
   </script>
+<body>
+  <h2>Ro'yxatdan o'tish</h2>
+
+  <form id="myForm">
+    <input type="text" name="name" placeholder="Ism" required><br><br>
+    <input type="email" name="email" placeholder="Email" required><br><br>
+    <button type="submit">Yuborish</button>
+  </form>
+
+  <div id="message" style="margin-top:15px; color:green;"></div>
+
+  <script>
+    document.getElementById("myForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const data = new FormData(form);
+
+      fetch("https://script.google.com/macros/s/https://script.google.com/macros/s/AKfycbwx6TWf8nk1iBNQ-OLEXk2a0M2V7-TFnBXTZ2aQWb9TeDdnjDywaIPJ_sAAcYa88nDYLQ/execexec", {
+        method: "POST",
+        body: data
+      })
+      .then(res => res.text())
+      .then(() => {
+        document.getElementById("message").innerHTML = `
+          ✅ Ro'yxatdan o'tdingiz! <br>
+          👉 <a href="https://t.me/+tcenZHS3OEJlOGRi" target="_blank">Telegram kanalga o'tish</a>
+        `;
+        form.reset();
+      })
+      .catch(err => {
+        document.getElementById("message").innerText = "Xatolik yuz berdi, qayta urinib ko'ring.";
+        console.error(err);
+      });
+    });
+  </script>
+</body>
+
 </body>
 </html>

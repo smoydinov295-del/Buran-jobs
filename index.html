@@ -79,10 +79,11 @@
       const form = e.target;
       const data = new FormData(form);
 
-      fetch("https://script.google.com/macros/s/https://script.google.com/macros/s/AKfycbwx6TWf8nk1iBNQ-OLEXk2a0M2V7-TFnBXTZ2aQWb9TeDdnjDywaIPJ_sAAcYa88nDYLQ/execexec", {
-        method: "POST",
-        body: data
-      })
+      fetch("https://script.google.com/macros/s/AKfycbwx6TWf8nk1iBNQ-OLEXk2a0M2V7-TFnBXTZ2aQWb9TeDdnjDywaIPJ_sAAcYa88nDYLQ/exec", {
+  method: "POST",
+  body: data
+})
+
       .then(res => res.text())
       .then(() => {
         document.getElementById("message").innerHTML = `

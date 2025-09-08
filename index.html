@@ -16,20 +16,38 @@
     button[type="submit"]:hover {background:#218838;}
     #message {margin-top:10px; font-weight:bold; text-align:center;}
 
-    /* Loader (spinning circle) */
-    .loader {
-      border: 4px solid #f3f3f3;
-      border-top: 4px solid #28a745;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      animation: spin 1s linear infinite;
-      margin: 15px auto;
+    /* Overlay loader */
+    #overlay {
       display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(255,255,255,0.9);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
     }
+
+    .loader {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #28a745;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+    }
+
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
+    }
+
+    #overlay p {
+      margin-top: 15px;
+      font-size: 18px;
+      color: #333;
     }
   </style>
 </head>
@@ -67,17 +85,20 @@
       <button type="submit">Yuborish</button>
     </form>
 
-    <!-- Loader qo'shildi -->
-    <div class="loader" id="loader"></div>
-
     <div id="message"></div>
+  </div>
+
+  <!-- Overlay loader -->
+  <div id="overlay">
+    <div class="loader"></div>
+    <p>Ma'lumot yuborilmoqda...</p>
   </div>
 
   <script>
     const video = document.getElementById("promo-video");
     const btn = document.getElementById("register-btn");
     const formContainer = document.getElementById("form-container");
-    const loader = document.getElementById("loader");
+    const overlay = document.getElementById("overlay");
     const message = document.getElementById("message");
 
     // Video tugaganda tugma chiqsin
@@ -97,8 +118,8 @@
       const form = e.target;
       const data = new FormData(form);
 
-      // Loader ko‘rsatish
-      loader.style.display = "block";
+      // Overlay ko‘rsatish
+      overlay.style.display = "flex";
       message.innerHTML = "";
 
       fetch("https://script.google.com/macros/s/AKfycbyDYhtpAgqHB7UmPRAWLUkTUJQ0oKNfNC5NKHuv9VbHV6siBs0Jqyo2YUcQUmHxrGmZrQ/exec", {
@@ -107,7 +128,7 @@
       })
       .then(res=>res.text())
       .then(()=>{
-        loader.style.display = "none";
+        overlay.style.display = "none";
         message.innerHTML = "✅ Ro'yxatdan muvaffaqiyatli o‘tdingiz!<br>⏳ 3 soniyadan keyin Telegram kanalga o‘tasiz...";
         form.reset();
 
@@ -117,7 +138,7 @@
         }, 3000);
       })
       .catch(()=>{
-        loader.style.display = "none";
+        overlay.style.display = "none";
         message.innerText = "❌ Xatolik yuz berdi, qayta urinib ko‘ring.";
       });
     });

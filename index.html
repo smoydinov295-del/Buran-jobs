@@ -1,131 +1,278 @@
 <!DOCTYPE html>
 <html lang="uz">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video + Forma</title>
-  <style>
-    body {font-family: Arial, sans-serif; text-align: center; background: #f9f9f9; margin:0; padding:20px;}
-    video {width: 100%; max-width: 700px; border-radius: 10px; margin:20px 0;}
-    #register-btn {display:none; padding:12px 20px; background:#007BFF; color:#fff; border:none; border-radius:8px; cursor:pointer;}
-    #register-btn:hover {background:#0056b3;}
-    #form-container {display:none; max-width:400px; margin:20px auto; background:#fff; padding:20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); text-align:left;}
-    label {display:block; margin-top:10px; font-weight:bold;}
-    input, select {width:100%; padding:10px; margin:5px 0 15px 0; border:1px solid #ccc; border-radius:5px;}
-    button[type="submit"] {background:#28a745; color:#fff; padding:12px; border:none; border-radius:6px; cursor:pointer; width:100%; font-size:16px;}
-    button[type="submit"]:hover {background:#218838;}
-    #message {margin-top:10px; font-weight:bold; text-align:center;}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video + Forma</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #ffffff;
+            background: linear-gradient(11deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 37%, rgba(167, 79, 255, 1) 100%);
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding: 20px;
+            box-sizing: border-box;
+        }
 
-    /* Loader (spinning circle) */
-    .loader {
-      border: 4px solid #f3f3f3;
-      border-top: 4px solid #28a745;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      animation: spin 1s linear infinite;
-      margin: 15px auto;
-      display: none;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-  </style>
+        video {
+            width: 100%;
+            max-width: 700px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        #register-btn {
+            display: none;
+            padding: 12px 20px;
+            background: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    
+            #register-btn:hover {
+                background: #0056b3;
+            }
+
+        #form-container {
+            display: none;
+            max-width: 400px;
+            margin: 20px auto;
+            background: #dfdee2;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16PX;
+        }
+
+        button[type="submit"] {
+            background: #28a745;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        button[type="submit"]:hover {
+            background: #218838;
+        }
+
+        #message {
+            margin-top: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* Loader (spinning circle) */
+        .loader {
+            border: 4px solid #f3f3f3;
+
+            border-top: 4px solid #28a745;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 15px auto;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+
+
+        .logo {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .logo .b-box {
+            background: #e30613;
+            /* qizil fon */
+            color: #fff;
+            font-weight: 900;
+            font-size: 70px;
+            width: 90px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8PX;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .logo-text .buran {
+            font-size: 70px;
+            font-weight: 900;
+            color: #111;
+            letter-spacing: 2px;
+        }
+.logo-text .consulting {
+            font-size: 28px;
+            font-weight: 600;
+            color: #111;
+            letter-spacing: 5px;
+            margin-top: 8px;
+        }
+         @media (max-width:480px){
+        .logo{
+            text-align: center;
+            align-items: center;
+            gap: 6px;
+            
+        }
+        .logo .b-box{
+            width: 60px;
+            height: 60px;
+            font-size: 32px;
+        }
+        .logo-text .buran{
+            font-size: 28px;
+        }
+        .logo-text .consulting{
+            font-size: 12px;
+            letter-spacing: 3px;
+        }
+       }
+    </style>
 </head>
+
 <body>
+    <div class="logo">
+        <div class="b-box">B</div>
+        <div class="logo-text">
+            <div class="buran">URAN</div>
+            <div class="consulting">CONSULTING</div>
+        </div>
+    </div>
+    <h2>Buran Consalting agentligi haqida umumiy ma'lumotlar!</h2>
+    <p>Videoni oxirigacha ko‘ring, so‘ng ro'yxatdan o‘tish uchun link beriladi 👇</p>
 
-  <h2>Buran Consalting agentligi haqida umumiy ma'lumotlar!</h2>
-  <p>Videoni oxirigacha ko‘ring, so‘ng ro'yxatdan o‘tish uchun link beriladi 👇</p>
+    <video id="promo-video" controls>
+        <source src="IMG_5943.MOV" type="video/mp4">
+        Brauzeringiz videoni qo‘llab-quvvatlamaydi.
+    </video>
 
-  <video id="promo-video" controls>
-    <source src="vvideo.mp4" type="video/mp4">
-    Brauzeringiz videoni qo‘llab-quvvatlamaydi.
-  </video>
+    <button id="register-btn">Ro‘yxatdan o‘tish</button>
 
-  <button id="register-btn">Ro‘yxatdan o‘tish</button>
+    <div id="form-container">
+        <h3>Ro'yxatdan o'tish</h3>
+        <form id="myForm">
+            <label for="fullname">Ism Familiya</label>
+            <input type="text" id="fullname" name="fullname" placeholder="Ism Familiya" required>
 
-  <div id="form-container">
-    <h3>Ro'yxatdan o'tish</h3>
-    <form id="myForm">
-      <label for="fullname">Ism Familiya</label>
-      <input type="text" id="fullname" name="fullname" placeholder="Ism Familiya" required>
+            <label for="phone">Telefon raqam</label>
+            <input type="tel" id="phone" name="phone" placeholder="+998901234567" pattern="^\+998\d{9}$" required>
 
-      <label for="phone">Telefon raqam</label>
-      <input type="tel" id="phone" name="phone" placeholder="+998901234567" pattern="^\+998\d{9}$" required>
+            <label for="location">Yashash hududi</label>
+            <input type="text" id="location" name="location" placeholder="Toshkent, Samarqand..." required>
 
-      <label for="location">Yashash hududi</label>
-      <input type="text" id="location" name="location" placeholder="Toshkent, Samarqand..." required>
+            <!-- 🔥 Yangi savol qo‘shildi -->
+            <label for="age">Yoshingiz nechida?</label>
+            <input type="number" id="age" name="age" placeholder="Masalan: 20" min="10" max="100" required>
 
-      <!-- 🔥 Yangi savol qo‘shildi -->
-      <label for="age">Yoshingiz nechida?</label>
-      <input type="number" id="age" name="age" placeholder="Masalan: 20" min="10" max="100" required>
+            <label for="availability">09:30 dan 18:30 gacha ishlay olasizmi?</label>
+            <select id="availability" name="availability" required>
+                <option value="">Tanlang</option>
+                <option value="Ha">Ha</option>
+                <option value="Yo‘q">Yo‘q</option>
+            </select>
 
-      <label for="availability">09:30 dan 18:30 gacha ishlay olasizmi?</label>
-      <select id="availability" name="availability" required>
-        <option value="">Tanlang</option>
-        <option value="Ha">Ha</option>
-        <option value="Yo‘q">Yo‘q</option>
-      </select>
+            <button type="submit">Yuborish</button>
+        </form>
 
-      <button type="submit">Yuborish</button>
-    </form>
+        <!-- Loader qo'shildi -->
+        <div class="loader" id="loader"></div>
 
-    <!-- Loader qo'shildi -->
-    <div class="loader" id="loader"></div>
+        <div id="message"></div>
+    </div>
 
-    <div id="message"></div>
-  </div>
+    <script>
+        const video = document.getElementById("promo-video");
+        const btn = document.getElementById("register-btn");
+        const formContainer = document.getElementById("form-container");
+        const loader = document.getElementById("loader");
+        const message = document.getElementById("message");
 
-  <script>
-    const video = document.getElementById("promo-video");
-    const btn = document.getElementById("register-btn");
-    const formContainer = document.getElementById("form-container");
-    const loader = document.getElementById("loader");
-    const message = document.getElementById("message");
+        // Video tugaganda tugma chiqsin
+        video.addEventListener("ended", () => {
+            btn.style.display = "inline-block";
+        });
 
-    // Video tugaganda tugma chiqsin
-    video.addEventListener("ended", () => {
-      btn.style.display = "inline-block";
-    });
+        // Tugma bosilganda forma chiqsin
+        btn.addEventListener("click", () => {
+            formContainer.style.display = "block";
+            btn.style.display = "none";
+        });
 
-    // Tugma bosilganda forma chiqsin
-    btn.addEventListener("click", () => {
-      formContainer.style.display = "block";
-      btn.style.display = "none";
-    });
+        // Forma yuborish
+        document.getElementById("myForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const form = e.target;
+            const data = new FormData(form);
 
-    // Forma yuborish
-    document.getElementById("myForm").addEventListener("submit", function(e){
-      e.preventDefault();
-      const form = e.target;
-      const data = new FormData(form);
-
-      // Loader ko‘rsatish
-      loader.style.display = "block";
-      message.innerHTML = "";
-
-      fetch("https://script.google.com/macros/s/AKfycbyDYhtpAgqHB7UmPRAWLUkTUJQ0oKNfNC5NKHuv9VbHV6siBs0Jqyo2YUcQUmHxrGmZrQ/exec", {
-        method:"POST",
-        body:data
-      })
-      .then(res=>res.text())
-      .then(()=>{
-        loader.style.display = "none";
-        message.innerHTML = "✅ Ro'yxatdan muvaffaqiyatli o‘tdingiz!<br>⏳ 3 soniyadan keyin Telegram kanalga o‘tasiz...";
-        form.reset();
-
-        // 3 soniyadan keyin avtomatik yo‘naltirish
-        setTimeout(()=>{
-          window.location.href = "https://t.me/+tcenZHS3OEJlOGRi";
-        }, 3000);
-      })
-      .catch(()=>{
-        loader.style.display = "none";
-        message.innerText = "❌ Xatolik yuz berdi, qayta urinib ko‘ring.";
-      });
-    });
-  </script>
+            // Loader ko‘rsatish
+            loader.style.display = "block";
+            message.innerHTML = "";
+            fetch("https://script.google.com/macros/s/AKfycbyDYhtpAgqHB7UmPRAWLUkTUJQ0oKNfNC5NKHuv9VbHV6siBs0Jqyo2YUcQUmHxrGmZrQ/exec", {
+                method: "POST",
+                body: data
+            })
+                .then(res => res.text())
+                .then(() => {
+                    loader.style.display = "none";
+                    message.innerHTML = "✅ Ro'yxatdan muvaffaqiyatli o‘tdingiz!<br>⏳ 3 soniyadan keyin Telegram kanalga o‘tasiz...";
+                    form.reset();
+// 3 soniyadan keyin avtomatik yo‘naltirish
+                    setTimeout(() => {
+                        window.location.href = "https://t.me/+tcenZHS3OEJlOGRi";
+                    }, 3000);
+                })
+                .catch(() => {
+                    loader.style.display = "none";
+                    message.innerText = "❌ Xatolik yuz berdi, qayta urinib ko‘ring.";
+                });
+        });
+    </script>
 
 </body>
+
 </html>

@@ -5,16 +5,81 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Video + Forma</title>
   <style>
-    body {font-family: Arial, sans-serif; text-align: center; background: #f9f9f9; margin:0; padding:20px;}
-    video {width: 100%; max-width: 700px; border-radius: 10px; margin:20px 0;}
-    #register-btn {display:none; padding:12px 20px; background:#007BFF; color:#fff; border:none; border-radius:8px; cursor:pointer;}
-    #register-btn:hover {background:#0056b3;}
-    #form-container {display:none; max-width:400px; margin:20px auto; background:#fff; padding:20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); text-align:left;}
-    label {display:block; margin-top:10px; font-weight:bold;}
-    input, select {width:100%; padding:10px; margin:5px 0 15px 0; border:1px solid #ccc; border-radius:5px;}
-    button[type="submit"] {background:#28a745; color:#fff; padding:12px; border:none; border-radius:6px; cursor:pointer; width:100%; font-size:16px;}
-    button[type="submit"]:hover {background:#218838;}
-    #message {margin-top:10px; font-weight:bold; text-align:center;}
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+      /* 🔥 Bardovy gradient background */
+      background: linear-gradient(135deg, #b35d74, #d48a9b);
+      color: #fff;
+      min-height: 100vh;
+    }
+    video {
+      width: 100%;
+      max-width: 700px;
+      border-radius: 10px;
+      margin: 20px 0;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+    #register-btn {
+      display: none;
+      padding: 12px 20px;
+      background: #ffcc00;
+      color: #333;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    #register-btn:hover {
+      background: #e6b800;
+      transform: scale(1.05);
+    }
+    #form-container {
+      display: none;
+      max-width: 400px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      text-align: left;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0 15px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button[type="submit"] {
+      background: #28a745;
+      color: #fff;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    button[type="submit"]:hover {
+      background: #218838;
+      transform: scale(1.03);
+    }
+    #message {
+      margin-top: 10px;
+      font-weight: bold;
+      text-align: center;
+    }
 
     /* Loader (spinning circle) */
     .loader {
@@ -57,7 +122,6 @@
       <label for="location">Yashash hududi</label>
       <input type="text" id="location" name="location" placeholder="Toshkent, Samarqand..." required>
 
-      <!-- 🔥 Yangi savol qo‘shildi -->
       <label for="age">Yoshingiz nechida?</label>
       <input type="number" id="age" name="age" placeholder="Masalan: 20" min="10" max="100" required>
 
@@ -71,9 +135,7 @@
       <button type="submit">Yuborish</button>
     </form>
 
-    <!-- Loader qo'shildi -->
     <div class="loader" id="loader"></div>
-
     <div id="message"></div>
   </div>
 
@@ -84,24 +146,20 @@
     const loader = document.getElementById("loader");
     const message = document.getElementById("message");
 
-    // Video tugaganda tugma chiqsin
     video.addEventListener("ended", () => {
       btn.style.display = "inline-block";
     });
 
-    // Tugma bosilganda forma chiqsin
     btn.addEventListener("click", () => {
       formContainer.style.display = "block";
       btn.style.display = "none";
     });
 
-    // Forma yuborish
     document.getElementById("myForm").addEventListener("submit", function(e){
       e.preventDefault();
       const form = e.target;
       const data = new FormData(form);
 
-      // Loader ko‘rsatish
       loader.style.display = "block";
       message.innerHTML = "";
 
@@ -114,8 +172,6 @@
         loader.style.display = "none";
         message.innerHTML = "✅ Ro'yxatdan muvaffaqiyatli o‘tdingiz!<br>⏳ 3 soniyadan keyin Telegram kanalga o‘tasiz...";
         form.reset();
-
-        // 3 soniyadan keyin avtomatik yo‘naltirish
         setTimeout(()=>{
           window.location.href = "https://t.me/+tcenZHS3OEJlOGRi";
         }, 3000);

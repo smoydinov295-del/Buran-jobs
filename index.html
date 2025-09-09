@@ -9,44 +9,66 @@
       font-family: Arial, sans-serif;
       text-align: center;
       margin: 0;
-      padding: 20px;
-      /* 🔥 Bardovy gradient background */
-      background: linear-gradient(135deg, #b35d74, #d48a9b);
-      color: #fff;
-      min-height: 100vh;
+      padding: 0;
+      background: linear-gradient(to bottom, #ffccd2, #800020); /* och pushti → bordo qizil */
     }
     video {
       width: 100%;
       max-width: 700px;
       border-radius: 10px;
       margin: 20px 0;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
     }
     #register-btn {
       display: none;
       padding: 12px 20px;
-      background: #ffcc00;
-      color: #333;
+      background: #007BFF;
+      color: #fff;
       border: none;
       border-radius: 8px;
       cursor: pointer;
+      font-size: 16px;
       font-weight: bold;
-      transition: 0.3s;
     }
     #register-btn:hover {
-      background: #e6b800;
-      transform: scale(1.05);
+      background: #0056b3;
     }
-    #form-container {
+
+    /* Modal */
+    .modal {
       display: none;
-      max-width: 400px;
-      margin: 20px auto;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
       background: #fff;
       padding: 20px;
       border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      max-width: 400px;
+      width: 90%;
       text-align: left;
-      color: #333;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      animation: fadeIn 0.4s;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: scale(0.8);}
+      to {opacity: 1; transform: scale(1);}
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover {
+      color: #000;
     }
     label {
       display: block;
@@ -58,22 +80,20 @@
       padding: 10px;
       margin: 5px 0 15px 0;
       border: 1px solid #ccc;
-      border-radius: 6px;
+      border-radius: 5px;
     }
     button[type="submit"] {
       background: #28a745;
       color: #fff;
       padding: 12px;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
       cursor: pointer;
       width: 100%;
       font-size: 16px;
-      transition: 0.3s;
     }
     button[type="submit"]:hover {
       background: #218838;
-      transform: scale(1.03);
     }
     #message {
       margin-top: 10px;
@@ -81,7 +101,7 @@
       text-align: center;
     }
 
-    /* Loader (spinning circle) */
+    /* Loader */
     .loader {
       border: 4px solid #f3f3f3;
       border-top: 4px solid #28a745;
@@ -110,54 +130,65 @@
 
   <button id="register-btn">Ro‘yxatdan o‘tish</button>
 
-  <div id="form-container">
-    <h3>Ro'yxatdan o'tish</h3>
-    <form id="myForm">
-      <label for="fullname">Ism Familiya</label>
-      <input type="text" id="fullname" name="fullname" placeholder="Ism Familiya" required>
+  <!-- Modal -->
+  <div id="formModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Ro'yxatdan o'tish</h3>
+      <form id="myForm">
+        <label for="fullname">Ism Familiya</label>
+        <input type="text" id="fullname" name="fullname" placeholder="Ism Familiya" required>
 
-      <label for="phone">Telefon raqam</label>
-      <input type="tel" id="phone" name="phone" placeholder="+998901234567" pattern="^\+998\d{9}$" required>
+        <label for="phone">Telefon raqam</label>
+        <input type="tel" id="phone" name="phone" placeholder="+998901234567" pattern="^\+998\d{9}$" required>
 
-      <label for="location">Yashash hududi</label>
-      <input type="text" id="location" name="location" placeholder="Toshkent, Samarqand..." required>
+        <label for="location">Yashash hududi</label>
+        <input type="text" id="location" name="location" placeholder="Toshkent, Samarqand..." required>
 
-      <label for="age">Yoshingiz nechida?</label>
-      <input type="number" id="age" name="age" placeholder="Masalan: 20" min="10" max="100" required>
+        <label for="age">Yoshingiz nechida?</label>
+        <input type="number" id="age" name="age" placeholder="Masalan: 20" min="10" max="100" required>
 
-      <label for="availability">09:30 dan 18:30 gacha ishlay olasizmi?</label>
-      <select id="availability" name="availability" required>
-        <option value="">Tanlang</option>
-        <option value="Ha">Ha</option>
-        <option value="Yo‘q">Yo‘q</option>
-      </select>
+        <label for="availability">09:30 dan 18:30 gacha ishlay olasizmi?</label>
+        <select id="availability" name="availability" required>
+          <option value="">Tanlang</option>
+          <option value="Ha">Ha</option>
+          <option value="Yo‘q">Yo‘q</option>
+        </select>
 
-      <button type="submit">Yuborish</button>
-    </form>
+        <button type="submit">Yuborish</button>
+      </form>
 
-    <div class="loader" id="loader"></div>
-    <div id="message"></div>
+      <div class="loader" id="loader"></div>
+      <div id="message"></div>
+    </div>
   </div>
 
   <script>
     const video = document.getElementById("promo-video");
     const btn = document.getElementById("register-btn");
-    const formContainer = document.getElementById("form-container");
+    const modal = document.getElementById("formModal");
+    const closeBtn = document.querySelector(".close");
     const loader = document.getElementById("loader");
     const message = document.getElementById("message");
+    const form = document.getElementById("myForm");
 
+    // Video tugaganda tugma chiqsin
     video.addEventListener("ended", () => {
       btn.style.display = "inline-block";
     });
 
+    // Tugma bosilganda modal chiqsin
     btn.addEventListener("click", () => {
-      formContainer.style.display = "block";
-      btn.style.display = "none";
+      modal.style.display = "flex";
     });
 
-    document.getElementById("myForm").addEventListener("submit", function(e){
+    // Modal yopish
+    closeBtn.onclick = () => modal.style.display = "none";
+    window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; };
+
+    // Forma yuborish
+    form.addEventListener("submit", function(e){
       e.preventDefault();
-      const form = e.target;
       const data = new FormData(form);
 
       loader.style.display = "block";
@@ -172,6 +203,7 @@
         loader.style.display = "none";
         message.innerHTML = "✅ Ro'yxatdan muvaffaqiyatli o‘tdingiz!<br>⏳ 3 soniyadan keyin Telegram kanalga o‘tasiz...";
         form.reset();
+
         setTimeout(()=>{
           window.location.href = "https://t.me/+tcenZHS3OEJlOGRi";
         }, 3000);
